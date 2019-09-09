@@ -1,25 +1,36 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import { Layout, Icon, Button,Avatar} from 'antd';
+import LeftMenu from './LeftMenu';
+import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
+import GameList from "../Component/GameList";
+import GameRecord from "../Component/GameRecord";
+import HomePage from "../Component/HomePage";
+import './App.less';
+const { Header, Footer, Sider, Content } = Layout;
+class App extends React.Component{
+  constructor(props) {
+    super(props);
+  }
+  componentDidMount() {
+  }
+  render() {
+    return(
+        <BrowserRouter>
+          <Layout style={{minHeight: '100vh'}}>
+            <LeftMenu/>
+            <Layout>
+              <Content style={{margin: '10px 10px', padding: 20, background: '#fff'}}>
+                <Switch>
+                  <Route exact path="/user" component={() =><Redirect to="/user/homePage"/>}/>
+                  <Route path='/user/homepage' component={HomePage}/>
+                  <Route path='/user/gameList' component={GameList}/>
+                  <Route path='/user/gameRecord' component={GameRecord}/>
+                </Switch>
+              </Content>
+            </Layout>
+          </Layout>
+        </BrowserRouter>
+    )
+  }
 }
-
 export default App;

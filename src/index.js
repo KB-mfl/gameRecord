@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App/App';
+import Auth from './Auth/index'
 import preprocess from './preprocess'
 import { Spin } from 'antd'
 import store from "store";
@@ -13,9 +14,12 @@ ReactDOM.render((
 ),document.getElementById('root'));
 
 const LoginUser = ['admin', 'tourist'];
-
+const Login = window.location.pathname.split('/')[1]
 // preprocess().then(() => {
 //     ReactDOM.render(<App/>, document.getElementById('root'));
 // }).catch(() => {
 // });
-ReactDOM.render(<App/>, document.getElementById('root'));
+if (Login==='login' || Login==='register' || Login==='forgot'){
+    ReactDOM.render(<Auth/>,document.getElementById('root'))
+}else
+    ReactDOM.render(<App/>, document.getElementById('root'));
